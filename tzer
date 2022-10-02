@@ -1,0 +1,69 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Jodis Hub", "Ocean")
+
+local Main = Window:NewTab("RPG")
+local MainSection = Main:NewSection("Farming")
+
+MainSection:NewToggle("AutoFarm", "Farm les NPC autour", function(state)
+    if state then 
+    _G.Toggle = true
+    while _G.Toggle do
+    wait()
+    game.Workspace.Enemies:FindFirstChildWhichIsA("Model") 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Enemies:FindFirstChildWhichIsA("Model").Torso.CFrame * CFrame.new(0,-2,2)
+    local A_1 = "swing"
+    local Event = game:GetService("Workspace").PlayersFolder.Jodis974.WeaponEvent
+    Event:FireServer(A_1)
+    end
+    else
+    _G.Toggle = false
+    while _G.Toggle do
+    wait()
+    game.Workspace.Enemies:FindFirstChildWhichIsA("Model") 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Enemies:FindFirstChildWhichIsA("Model").Torso.CFrame * CFrame.new(0,-2,2)
+    local A_1 = "swing"
+    local Event = game:GetService("Workspace").PlayersFolder.Jodis974.WeaponEvent
+    Event:FireServer(A_1)
+    end
+end
+end)
+MainSection:NewToggle("TP NPC", "Tp les NPC sur toi", function(state)
+    if state then
+    getgenv().Loop = true
+
+local PunchableCharacters = game.Workspace.Enemies
+local HumanoidRootPart = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+
+while Loop and wait() do
+    for i,v in pairs(PunchableCharacters:GetChildren()) do
+        if v:FindFirstChild("HumanoidRootPart") then
+            v.HumanoidRootPart.CFrame = HumanoidRootPart.CFrame*CFrame.new(0,0,-4)
+        end
+    end
+end
+else
+getgenv().Loop = false
+
+local PunchableCharacters = game.Workspace.Enemies
+local HumanoidRootPart = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+
+while Loop and wait() do
+    for i,v in pairs(PunchableCharacters:GetChildren()) do
+        if v:FindFirstChild("HumanoidRootPart") then
+            v.HumanoidRootPart.CFrame = HumanoidRootPart.CFrame*CFrame.new(0,0,-4)
+        end
+    end
+end
+end
+end)
+
+MainSection:NewToggle("TP SHARD", "Tp les Shards sur toi", function(state)
+local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+for i , v in pairs (workspace:GetDescendants()) do
+  local obj = v
+  if string.find(obj.Name, "Shard") then
+      hrp.CFrame = obj.CFrame + Vector3.new(0,4,0)
+      wait(0.5)
+  end
+end
+end)
